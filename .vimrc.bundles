@@ -85,13 +85,15 @@
             Bundle 'mileszs/ack.vim'
         elseif executable('ack')
             Bundle 'mileszs/ack.vim'
+        else
+            echo 'ag, ack-grep, ack....Not Found.'
         endif
     " }
 
     " In your .vimrc.before.local file
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
-        let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming']
+        let g:spf13_bundle_groups=['general', 'neocomplcache', 'programming', 'python']
     endif
 
     " To override all the included bundles, add the following to your
@@ -153,6 +155,11 @@
         if count(g:spf13_bundle_groups, 'programming')
             " Pick one of the checksyntax, jslint, or syntastic
             Bundle 'scrooloose/syntastic'
+            if executable('pyflakes')
+                let g:syntastic_python_checkers = ['pyflakes']
+            else
+                echo 'pyflakes......Not Found.'
+            endif
             Bundle 'tpope/vim-fugitive'
             Bundle 'mattn/webapi-vim'
             Bundle 'mattn/gist-vim'
@@ -163,7 +170,12 @@
             Bundle 'aperezdc/vim-template'
             if executable('ctags')
                 Bundle 'majutsushi/tagbar'
+            else
+                echo "ctags....Not Found."
             endif
+            Bundle 'google/vim-maktaba'
+            Bundle 'google/vim-codefmt'
+            Bundle 'google/vim-glaive'
         endif
     " }
 
